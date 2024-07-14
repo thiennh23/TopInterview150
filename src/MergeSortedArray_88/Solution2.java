@@ -1,5 +1,8 @@
 package MergeSortedArray_88;
 
+
+//This is accepted solution
+
 public class Solution2 {
 
     public static void main(String[] args) {
