@@ -1,6 +1,6 @@
 package Merge2SortedLists_21;
 
-public class Solution {
+public class Solution2 {
 
     public static void main(String[] args) {
         ListNode a = new ListNode(-9);
@@ -38,35 +38,41 @@ public class Solution {
 
     public static ListNode mergeTwoLists(ListNode list1, ListNode list2) {
 
-        //Check if null -> return directly
-        if (list1 == null)
-            return list2;
-        else if (list2 == null)
-            return list1;
-        else if (list1 == null && list2 == null)
-            return list1;
+        // create a result node to point to the head of the merged list
+        ListNode result = new ListNode();
+        // create a pointer to iterate through the result node
+        ListNode head = result;
 
-
-        //Process
-        //Create an ListNode to store result;
-        ListNode head = new ListNode(-999, null);
-        ListNode result = head;
-
+        // while both list1 and list2 are not null
         while (list1 != null && list2 != null) {
+            // if the value of list1 is less than or equal to the value of list2
             if (list1.val <= list2.val) {
+                // set the next value of head to the value of list1
                 head.next = list1;
+                // move list1 to the next node
                 list1 = list1.next;
-            } else {
+            }
+            // otherwise
+            else {
+                // set the next value of head to the value of list2
                 head.next = list2;
+                // move list2 to the next node
                 list2 = list2.next;
             }
+            // move head to the next node
             head = head.next;
         }
 
-        //Check the 1 or 2 remained nodes
-        if (list1 != null) head.next = list1;
-        if (list2 != null) head.next = list2;
+        // if list1 is not null, set the next value of head to the value of list1
+        if (list1 != null) {
+            head.next = list1;
+        }
+        // if list2 is not null, set the next value of head to the value of list2
+        if (list2 != null) {
+            head.next = list2;
+        }
 
+        // return the next value of result (which is the head of the merged list)
         return result.next;
     }
 
