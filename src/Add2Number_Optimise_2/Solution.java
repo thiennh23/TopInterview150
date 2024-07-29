@@ -53,8 +53,14 @@ public class Solution {
         int sum = 0;
 
         while (l1 != null || l2 != null || remainder > 0) {
-            if (l1 != null) num1 = l1.val; else num1 = 0;
-            if (l2 != null) num2 = l2.val; else num2 = 0;
+            if (l1 != null) {
+                num1 = l1.val;
+                l1 = l1.next;
+            } else num1 = 0;
+            if (l2 != null) {
+                num2 = l2.val;
+                l2 = l2.next;
+            } else num2 = 0;
             sum = num1 + num2 + remainder;
 
             //We just need remainder, so modular 10
@@ -62,13 +68,8 @@ public class Solution {
             sum = sum % 10;
 
             //Add to new Node
-            ListNode temp = new ListNode(sum, null);
-            current.next = temp;
+            current.next = new ListNode(sum, null);
             current = current.next;
-            if (l1 != null)
-                l1 = l1.next;
-            if (l2 != null)
-                l2 = l2.next;
         }
 
         return head.next;
