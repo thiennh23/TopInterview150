@@ -66,11 +66,11 @@ public class Solution {
         ListNode(int val, ListNode next) {this.val = val; this.next = next;}
     }*/
     public static class ListNode {
-        long val;
+        int val;
         ListNode next;
         ListNode(){}
-        ListNode(long val) {this.val = val;}
-        ListNode(long val, ListNode next) {this.val = val; this.next = next;}
+        ListNode(int val) {this.val = val;}
+        ListNode(int val, ListNode next) {this.val = val; this.next = next;}
     }
 
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
@@ -82,12 +82,12 @@ public class Solution {
         long answer = num1 + num2;
 
         //First, assign the value for head
-        head.val = answer % 10;
+        head.val = (int) (answer % 10);
         answer = answer / 10;
 
         //Assign next value
         while (answer > 0) {
-            ListNode temp = new ListNode(answer % 10, null);
+            ListNode temp = new ListNode((int) (answer % 10), null);
             answer = answer / 10;
             head.next = temp;
             head = head.next;
