@@ -3,7 +3,7 @@ package SearchInsertPosition_35;
 public class Solution {
     public static void main(String[] args) {
         int[] nums = new int[] {1, 3, 5, 6};
-        int target = 5;
+        int target = 2;
         System.out.println(searchInsert(nums, target));
     }
 
@@ -11,7 +11,7 @@ public class Solution {
         int start = 0;
         int end = nums.length - 1;
         int mid = (start + end) / 2;
-        while (start < end) {
+        while (start <= end - 1) {
             if (nums[mid] == target)
                 return mid;
             else if (nums[mid] > target)
@@ -20,6 +20,9 @@ public class Solution {
                 start = mid + 1;
             mid = (start + end) / 2;
         }
-        return -1;
+
+        if (nums[mid] < target)
+            return mid+1;
+        return mid;
     }
 }
