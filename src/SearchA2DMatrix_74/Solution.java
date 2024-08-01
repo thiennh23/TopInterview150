@@ -9,9 +9,9 @@ public class Solution {
                 {23,30,34,60}
         };
 
-        int target = 204;
+        int target = 3;
         System.out.println(searchMatrix(matrix, target));
-
+//        System.out.println(suitableRow(test, target));
         /*
         //Print 2D array
         for (int[] i : nums) {
@@ -21,14 +21,45 @@ public class Solution {
         }*/
     }
 
-    public static boolean searchMatrix(int[][] matrix, int target) {
+
+    //Go through every row of the matrix => M time (we have NxM matrix)
+    // => We will have the complexity: MxLog(N)
+    //So, is there any optimal way? The answer is YES
+    //Because the description given said: "The first integer of each row is greater than the last integer of the previous row."
+    // So we will check the suitable row and only check that row.
+    /*public static boolean searchMatrix(int[][] matrix, int target) {
         for (int[] i : matrix) {
             if (binarySearch(i, target))
                 return true;
         }
         return false;
+    }*/
+
+    //We will check the suitable row first by using binary search for first column.
+    // Then, we binary search the row
+    //So, we will have the complexity: Log(M)xLog(N) which is very great
+    public static boolean searchMatrix(int[][] matrix, int target) {
+        int row = suitableRow(matrix, target);
+        return binarySearch(matrix[row], target);
     }
 
+    //The complexity is: Log(M)
+    public static int suitableRow(int[][] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+        int mid = (left + right) / 2;
+        while (left <= right) {
+            if (nums[mid][0] == target)
+                return mid;
+            else if (nums[mid][0] > target)
+                right = mid - 1;
+            else left = mid + 1;
+            mid = (left + right) / 2;
+        }
+        return left - 1;
+    }
+
+    //The complexity is: Log(N)
     public static boolean binarySearch(int[] nums, int target) {
         int left = 0;
         int right = nums.length - 1;
