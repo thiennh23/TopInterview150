@@ -11,6 +11,7 @@ public class Solution {
         int start = 0;
         int end = nums.length - 1;
         int mid = (start + end) / 2;
+        //Or (start <= end)
         while (start <= end - 1) {
             if (nums[mid] == target)
                 return mid;
@@ -21,8 +22,10 @@ public class Solution {
             mid = (start + end) / 2;
         }
 
-        if (nums[mid] < target)
+        return start;
+        //Now start is >= left, so we will put the target next to left
+        /*if (nums[mid] < target)
             return mid+1;
-        return mid;
+        return mid;*/
     }
 }
